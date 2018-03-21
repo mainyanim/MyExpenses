@@ -1,9 +1,12 @@
+from django.views import generic
+from .models import *
 from django.shortcuts import render
 
-# Create your views here.
-
-from django.http import HttpResponse
-
-
 def index(request):
-    return HttpResponse("Hello, world. You're at the MyExpenses index.")
+    num_exp = Expense.objects.all().count()
+
+    return render(
+        request,
+        'index.html',
+        context={'num_exp': num_exp},
+    )
