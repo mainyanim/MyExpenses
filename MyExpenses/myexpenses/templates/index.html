@@ -3,11 +3,23 @@
 {% block content %}
 <h1>Expenses List</h1>
 
-<h2>Dynamic content</h2>
+{% if expenses %}
+      {% for n in expenses %}
+        <div>
 
-  <p>The list has the following record counts:</p>
-  <ul>
-    <li><strong>Expenses:</strong> {{ num_exp }}</li>
-  </ul>
+          <div class="post-title-text">{{ n.title }}</div><br>
+          <div class="post-text">{{ n.desc|linebreaksbr }}</div><br>
+          <div class="signature-text">{{n.price}}</div>
+
+      </div>
+      {% endfor %}
+      {%else%}
+      <div class="row">
+          <div class="col-md-12">
+            <h1 class = "hello-text">There's no expenses yet...</h1>
+          </div>
+        </div>
+      {%endif%}
+
 
 {% endblock %}
