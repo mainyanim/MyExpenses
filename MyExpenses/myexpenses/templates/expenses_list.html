@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+        {% for e in expenses %}
+        <h1><a href="{% url 'exp_detail' pk=e.pk %}">{{ e.title }}</a></h1>
+        <p>published: {{ e.date }}</p>
+        <p>{{ e.desc|linebreaksbr }}</p>
+        <p>{{ e.price|linebreaksbr }}</p>
+        <div class="container create-new-cont font-cont" id = "buttons_container">
+            <a class="btn btn-default" href="{% url 'exp_edit' pk=e.pk %}">EDIT</a>
+            <a class="btn btn-default" href="{% url 'exp_delete' pk=e.pk %}">DELETE</a>
+
+            </div>
+    </div>
+{% endfor %}
+{% endblock %}

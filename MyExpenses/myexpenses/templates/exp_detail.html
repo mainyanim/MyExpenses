@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="post">
+        {% if exp.date %}
+            <div class="date">
+                {{ exp.date }}
+            </div>
+        {% endif %}
+
+        <h1>{{ exp.title }}</h1>
+        <p>{{ exp.desc|linebreaksbr }}</p>
+        <p>{{ exp.price}}</p>
+
+
+
+    </div>
+{% endblock %}
