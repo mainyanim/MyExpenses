@@ -4,6 +4,9 @@ from .forms import *
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
 
 def exp_list(request):
@@ -40,12 +43,7 @@ def exp_edit(request, pk):
         form = ExpenseForm(instance=exp)
     return render(request, 'exp_edit.html', {'form': form})
 
-def exp_delete(request, pk):
-    exp = get_object_or_404(Expense, pk=pk)
-    if request.method == "POST":
-        form = ExpenseForm(request.POST, instance=exp)
-        exp.delete()
-        return redirect('expenses_list.html', pk=exp.pk)
-    else:
-        form = ExpenseForm(instance=exp)
-    return render(request, 'expenses_list.html', {'form': form})
+class ExpDelete(DeleteView):
+    model = Expense
+    success_url = reverse_lazy('exp_list')
+
