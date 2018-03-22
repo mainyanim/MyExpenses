@@ -7,11 +7,18 @@
       {% for n in expenses %}
         <div>
 
-          <div class="post-title-text">{{ n.title }}</div><br>
-          <div class="post-text">{{ n.desc|linebreaksbr }}</div><br>
-          <div class="signature-text">{{n.price}}</div>
+          <div class="post-title-text">Title: {{ n.title }}</div><br>
+          <div class="post-text">Description: {{ n.desc|linebreaksbr }}</div>
+            <br>
+            <div>{{n.date}}</div>
+          <div class="signature-text">SUM: {{n.price}}</div>
 
-      </div>
+            <div class="container create-new-cont font-cont" id = "buttons_container">
+                <button class = "btn btn-times" id = "close_form"><i class="fa fa-times" aria-hidden="true"></i>EDIT</button>
+              <button type="submit" class="btn btn-add" id = "add_comment"><i class="fa fa-check" aria-hidden="true"></i>DELETE</button>
+             </div>
+
+        </div>
       {% endfor %}
       {%else%}
       <div class="row">
