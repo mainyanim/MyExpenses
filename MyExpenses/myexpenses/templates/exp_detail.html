@@ -2,14 +2,14 @@
 
 {% block content %}
 
-        <h2>{{expense.title}}</h2>
-        <h3>{{expense.desc}}</h3>
-        <p>{{expense.price}}</p>
+        <h2>Expense: {{expense.title}}</h2>
+        <h3>Description: {{expense.desc}}</h3>
+        <p>Price: {{expense.price}}</p>
 
 
         {% for note in expense.notes.all %}
         <div class = "note">
-            <p>{{ note.text }}</p>
+            <p>Note: {{ note.text }}</p>
             <a class="btn btn-default" href="{% url 'note_edit' pk=note.pk %}">EDIT</a>
 
         </div>
@@ -21,4 +21,3 @@
 
 {% endblock %}
 
-    <!--<a class="btn btn-default" href="{% url 'add_note_to_post' pk=exp.pk %}">Add note</a> -->
