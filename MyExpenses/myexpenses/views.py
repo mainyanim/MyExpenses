@@ -17,8 +17,7 @@ def exp_list(request):
 def exp_detail(request, pk):
     exp = get_object_or_404(Expense, pk=pk)
     return render(request, 'exp_detail.html',
-                  {'exp': exp},
-                   )
+                  {'exp': exp})
 
 def exp_new(request):
     if request.method == "POST":
@@ -48,3 +47,15 @@ class ExpDelete(DeleteView):
     model = Expense
     success_url = reverse_lazy('exp_list')
 
+def add_comment_to_post(request, pk):
+    exp = get_object_or_404(Expense, pk=pk)
+    if request.method == "POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.post = note
+            note.save()
+            return redirect('blog.views.post_detail', pk=note.pk)
+    else:
+        form = NoteForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
