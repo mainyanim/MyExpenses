@@ -8,8 +8,8 @@ class ExpenseForm(forms.ModelForm):
         model = Expense
         fields = ('date', 'title', 'desc', 'price')
 
-class CommentForm(forms.ModelForm):
+class NoteForm(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['__all__']
+        fields = ('text',)

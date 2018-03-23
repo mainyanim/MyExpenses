@@ -2,17 +2,15 @@
 
 {% block content %}
 
-    <div class="post">
-        {% if exp.date %}
-            <div class="date">
-                {{ exp.date }}
-            </div>
-        {% endif %}
+    {% for expense in expenses %}
+        <h2>{{expense.title}}</h2>
+        <h3>{{expense.desc}}</h3>
+        <p>{{expense.price}}</p>
+        {% for note in expense.notes.all %}
+            <p>{{ note.text }}</p>
+        {% endfor %}
+    {% endfor %}
 
-        <h1>{{ exp.title }}</h1>
-        <p>{{ exp.desc|linebreaksbr }}</p>
-        <p>{{ exp.price}}</p>
-
-    </div>
-    <p>{{exp.note.all.0}}</p>
 {% endblock %}
+
+    <!--<a class="btn btn-default" href="{% url 'add_note_to_post' pk=exp.pk %}">Add note</a> -->

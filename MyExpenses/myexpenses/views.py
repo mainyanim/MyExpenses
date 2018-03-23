@@ -1,10 +1,9 @@
-from django.views import generic
-from .models import *
+
 from .forms import *
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.shortcuts import redirect
-from django.contrib import messages
+from django.template import loader
 from django.views.generic.edit import DeleteView, CreateView
 from django.urls import reverse_lazy, reverse
 
@@ -15,9 +14,9 @@ def exp_list(request):
                   {'expenses': expenses})
 
 def exp_detail(request, pk):
-    exp = get_object_or_404(Expense, pk=pk)
+    expenses = Expense.objects.all()
     return render(request, 'exp_detail.html',
-                  {'exp': exp})
+                  {'expenses': expenses})
 
 def exp_new(request):
     if request.method == "POST":
@@ -47,15 +46,15 @@ class ExpDelete(DeleteView):
     model = Expense
     success_url = reverse_lazy('exp_list')
 
-def add_comment_to_post(request, pk):
-    exp = get_object_or_404(Expense, pk=pk)
+def add_note_to_post(request, pk):
+    expense = get_object_or_404(Expense, pk=pk)
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():
             note = form.save(commit=False)
-            note.post = note
+            note.post = expense
             note.save()
-            return redirect('blog.views.post_detail', pk=note.pk)
+            return redirect('exp_detail', pk=note.pk)
     else:
         form = NoteForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'add_note_to_post.html', {'form': form})
