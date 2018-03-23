@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView, CreateView
+from django.urls import reverse_lazy, reverse
 
 
 def exp_list(request):
@@ -17,7 +17,8 @@ def exp_list(request):
 def exp_detail(request, pk):
     exp = get_object_or_404(Expense, pk=pk)
     return render(request, 'exp_detail.html',
-                  {'exp': exp})
+                  {'exp': exp},
+                   )
 
 def exp_new(request):
     if request.method == "POST":
