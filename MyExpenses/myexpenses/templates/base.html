@@ -10,15 +10,22 @@
     <title>Title</title>
 </head>
 <body>
+
+    <div class = "container">
     <div class="page-header">
         <h1><a href="/">Expenses</a></h1>
-    <a href="{% url 'exp_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
     </div>
-    <div class="content container">
-            <div class="col-md-12">
+
+    <div class = "navbar">
+     <a href="{% url 'exp_new' %}" class="top-menu">
+        <h2>Add new expense</h2>
+     </a>
+    </div>
+            <div class="col-md-8">
+                <div class="row">
             {% block content %}
             {% endblock %}
             </div>
-    </div>
+        </div>
 </body>
 </html>

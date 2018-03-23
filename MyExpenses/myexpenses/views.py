@@ -13,10 +13,12 @@ def exp_list(request):
     return render(request, 'expenses_list.html',
                   {'expenses': expenses})
 
+
 def exp_detail(request, pk):
     expense = get_object_or_404(Expense, pk=pk)
     return render(request, 'exp_detail.html',
                   {'expense': expense})
+
 
 def exp_new(request):
     if request.method == "POST":
@@ -42,9 +44,24 @@ def exp_edit(request, pk):
         form = ExpenseForm(instance=exp)
     return render(request, 'exp_edit.html', {'form': form})
 
+
+def note_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    if request.method == "POST":
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.save()
+            return redirect('exp_detail', pk=note.pk)
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'note_edits.html', {'form': form})
+
+
 class ExpDelete(DeleteView):
     model = Expense
     success_url = reverse_lazy('exp_list')
+
 
 def add_note_to_post(request, pk):
     expense = get_object_or_404(Expense, pk=pk)

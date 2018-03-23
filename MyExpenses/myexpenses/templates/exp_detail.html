@@ -5,11 +5,19 @@
         <h2>{{expense.title}}</h2>
         <h3>{{expense.desc}}</h3>
         <p>{{expense.price}}</p>
-        <a class="btn btn-default" href="{% url 'add_note_to_post' pk=expense.pk %}">Add note</a>
+
 
         {% for note in expense.notes.all %}
+        <div class = "note">
             <p>{{ note.text }}</p>
-        {% endfor %}
+            <a class="btn btn-default" href="{% url 'note_edit' pk=note.pk %}">EDIT</a>
+
+        </div>
+    {% empty %}
+    <p>No notes here yet :(</p>
+<a class="btn btn-default" href="{% url 'add_note_to_post' pk=expense.pk %}">Add note</a>
+
+{% endfor %}
 
 {% endblock %}
 
