@@ -52,9 +52,9 @@ def add_note_to_post(request, pk):
         form = NoteForm(request.POST)
         if form.is_valid():
             note = form.save(commit=False)
-            note.post = expense
+            note.expense = expense
             note.save()
-            return redirect('exp_detail', pk=note.pk)
+            return redirect('exp_detail', pk=expense.pk)
     else:
         form = NoteForm()
     return render(request, 'add_note_to_post.html', {'form': form})
