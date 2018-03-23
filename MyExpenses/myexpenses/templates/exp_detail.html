@@ -2,14 +2,12 @@
 
 {% block content %}
 
-    {% for expense in expenses %}
         <h2>{{expense.title}}</h2>
         <h3>{{expense.desc}}</h3>
         <p>{{expense.price}}</p>
         {% for note in expense.notes.all %}
             <p>{{ note.text }}</p>
         {% endfor %}
-    {% endfor %}
 
 {% endblock %}
 

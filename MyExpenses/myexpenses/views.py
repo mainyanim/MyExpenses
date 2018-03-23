@@ -14,9 +14,9 @@ def exp_list(request):
                   {'expenses': expenses})
 
 def exp_detail(request, pk):
-    expenses = Expense.objects.all()
+    expense = get_object_or_404(Expense, pk=pk)
     return render(request, 'exp_detail.html',
-                  {'expenses': expenses})
+                  {'expense': expense})
 
 def exp_new(request):
     if request.method == "POST":
